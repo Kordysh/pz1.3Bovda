@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>List of teachers</title>
+    <link th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" />
 </head>
 <body>
-$END$
+<div class="container">
+    <h1>Список викладачів</h1>
+    <div class="row">
+        <br>
+        <form action="#" th:action="@{/add}" th:object="${teachers}" method="post">
+            <table>
+                <tr>
+                    <td>Full Name:</td>
+                    <td><input type="text" th:field="*{fullName}" name="fullName"> </td>
+                </tr>
+                <tr>
+                    <td>Experience:</td>
+                    <td><input type="text" th:field="*{experience}" name="experience"></td>
+                </tr>
+                <tr>
+                    <td>Degree:</td>
+                    <td><input type="text" th:field="*{degree}" name="degree"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Add</button> </td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <div>
+            <a href="/download/pdf">Click here to download pdf</a> <br>
+            <a href="/download/excel">Click here to download excel</a><br>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Experience</th>
+                <th>Degree</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="teacher : ${teachers}">
+                <td th:text="${teacher.fullName}"></td>
+                <td th:text="${teacher.experience}"></td>
+                <td th:text="${teacher.degree}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
